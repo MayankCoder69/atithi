@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atithi Restaurant | अतिथि रेस्टोरेंट</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #ff6b35;
+            --secondary-color: #2d3436;
+            --accent-color: #f9ca24;
+            --light-bg: #fff5eb;
+            --text-color: #333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: var(--light-bg); color: var(--text-color); line-height: 1.6; }
+
+        header { background-color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0.5rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo-area { display: flex; align-items: center; gap: 15px; text-decoration: none; }
+        .logo-area img { height: 70px; width: auto; }
+        .brand-name h1 { color: var(--primary-color); font-size: 1.8rem; line-height: 1.1; }
+        .brand-name span { display: block; font-size: 0.9rem; color: var(--secondary-color); font-weight: normal; }
+
+        .nav-links { display: flex; gap: 10px; }
+        .nav-links a { text-decoration: none; color: var(--primary-color); font-weight: 600; padding: 8px 20px; border: 2px solid var(--primary-color); border-radius: 30px; transition: all 0.3s ease; background: transparent; }
+        .nav-links a:hover { background-color: var(--primary-color); color: white; box-shadow: 0 4px 8px rgba(255, 107, 53, 0.3); }
+
+        .hero { position: relative; height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white; padding: 2rem; overflow: hidden; box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.4); }
+        .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; z-index: -1; animation: slideAnimation 20s infinite; }
+        .hero-slide:nth-child(1) { background-image: url('https://z-cdn-media.chatglm.cn/files/c8d92686-5717-49b4-a955-e60b7d8031ef.png?auth_key=1874627738-9c778aeb89b240868c93a305c34b7860-0-bce67a3abfe84f16b841d22b9a9b2783'); animation-delay: 0s; }
+        .hero-slide:nth-child(2) { background-image: url('https://z-cdn-media.chatglm.cn/files/40b642ba-fe0c-4a2a-8174-9c1396883242.png?auth_key=1874627738-0164a12bece64891bd2a0c9da0cabedc-0-579e16432e542221ad318f2d6f40f6b9'); animation-delay: 5s; }
+        .hero-slide:nth-child(3) { background-image: url('https://z-cdn-media.chatglm.cn/files/704806e9-5b2f-40e8-9f69-732d336db1f1.png?auth_key=1874627738-110294b6648f40d89c477a81868224d9-0-6a76f57aa9a73385402337ce065e5da0'); animation-delay: 10s; }
+        .hero-slide:nth-child(4) { background-image: url('https://z-cdn-media.chatglm.cn/files/f9576a67-2e0d-461f-9ed4-57d916fc5772.png?auth_key=1874627738-30751a9f52a048008af6c4f3cba39bab-0-d3c0e19e335cf0c61f68ce5aa7930170'); animation-delay: 15s; }
+
+        @keyframes slideAnimation { 0% { opacity: 0; transform: scale(1.05); } 5% { opacity: 1; transform: scale(1); } 20% { opacity: 1; transform: scale(1); } 25% { opacity: 0; transform: scale(0.95); } 100% { opacity: 0; } }
+        .hero-content { z-index: 1; max-width: 800px; }
+        .hero h2 { font-size: 3.5rem; margin-bottom: 0.5rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .hero p { font-size: 1.2rem; margin-bottom: 1.5rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.5); }
+        .rating-badge { background: white; color: var(--secondary-color); padding: 0.5rem 1rem; border-radius: 5px; font-weight: bold; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .rating-badge i { color: var(--accent-color); }
+
+        section { max-width: 1200px; margin: 2rem auto; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .section-title { text-align: center; margin-bottom: 2rem; color: var(--primary-color); font-size: 2rem; border-bottom: 2px solid var(--accent-color); display: block; padding-bottom: 0.5rem; }
+
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .menu-category { background: var(--light-bg); padding: 1.5rem; border-radius: 8px; border-left: 5px solid var(--primary-color); }
+        .menu-category h3 { color: var(--primary-color); margin-bottom: 1rem; font-size: 1.4rem; display: flex; align-items: center; gap: 10px; }
+        .menu-item { display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px dashed #ddd; }
+        .menu-item:last-child { border-bottom: none; }
+        .item-name { font-weight: 500; color: var(--secondary-color); }
+        .item-price { font-weight: bold; color: var(--primary-color); }
+        .menu-note { text-align: center; font-size: 0.8rem; color: #777; margin-top: 1rem; font-style: italic; }
+
+        .booking-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        @media (max-width: 768px) { .booking-container, .menu-grid { grid-template-columns: 1fr; } .nav-container { flex-direction: column; gap: 1rem; } .nav-links a { font-size: 0.8rem; padding: 5px 10px; } .hero h2 { font-size: 2.2rem; } }
+
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--secondary-color); }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px; font-size: 1rem; transition: border-color 0.3s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary-color); outline: none; }
+        .form-group textarea { height: 120px; resize: vertical; }
+
+        .submit-btn { background-color: var(--primary-color); color: white; border: none; padding: 1rem 2rem; font-size: 1.1rem; border-radius: 5px; cursor: pointer; transition: all 0.3s; width: 100%; font-weight: bold; }
+        .submit-btn:hover { background-color: #e05a2b; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3); }
+
+        .info-box { background: var(--light-bg); padding: 1.5rem; border-radius: 8px; border-left: 5px solid var(--primary-color); }
+        .info-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+        .info-item i { color: var(--primary-color); font-size: 1.2rem; width: 20px; }
+
+        .services { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1.5rem; }
+        .service-tag { background: rgba(255,255,255,0.9); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; border: 1px solid white; color: var(--secondary-color); font-weight: 500; }
+
+        footer { background: var(--secondary-color); color: white; text-align: center; padding: 2rem; margin-top: 2rem; }
+
+        /* Confirmation Message Styling */
+        #confirmationMessage { display: none; background-color: #27ae60; color: white; padding: 1.5rem; border-radius: 5px; text-align: center; margin-top: 1rem; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="#home" class="logo-area">
+                <img src="https://z-cdn-media.chatglm.cn/files/70c4c0b9-7635-4d85-97e1-cf7117c3d2f4.png?auth_key=1874627194-c80fdfeafad34313b1f426e5c81d61e8-0-e90ab24113e8b528449824c3cdf4740a" alt="Atithi Logo">
+                <div class="brand-name">
+                    <h1>Atithi</h1>
+                    <span>अतिथि रेस्टोरेंट</span>
+                </div>
+            </a>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#menu">Menu</a>
+                <a href="#booking">Book Event</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <div class="hero" id="home">
+        <div class="hero-slide"></div><div class="hero-slide"></div><div class="hero-slide"></div><div class="hero-slide"></div>
+        <div class="hero-content">
+            <h2>Welcome to Atithi</h2>
+            <p>Vegetarian Restaurant | Transport Nagar, Haldwani</p>
+            <div class="rating-badge"><i class="fas fa-star"></i> 4.2 <span style="font-weight:normal; margin-left:5px;">(1,288 Reviews)</span></div>
+            <div class="services">
+                <span class="service-tag"><i class="fas fa-utensils"></i> Dine-in</span>
+                <span class="service-tag"><i class="fas fa-car"></i> Drive-through</span>
+                <span class="service-tag"><i class="fas fa-shield-alt"></i> No-contact delivery</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu Section -->
+    <section id="menu">
+        <h2 class="section-title">Our Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-category">
+                <h3><i class="fas fa-mug-hot"></i> Soups & Starters</h3>
+                <div class="menu-item"><span class="item-name">Tomato Soup</span><span class="item-price">₹79</span></div>
+                <div class="menu-item"><span class="item-name">Paneer Tikka</span><span class="item-price">₹169</span></div>
+                <div class="menu-item"><span class="item-name">Veg Seekh Kebab</span><span class="item-price">₹119</span></div>
+                <div class="menu-item"><span class="item-name">French Fries</span><span class="item-price">₹99</span></div>
+            </div>
+            <div class="menu-category">
+                <h3><i class="fas fa-bowl-food"></i> Indian Main Course</h3>
+                <div class="menu-item"><span class="item-name">Dal Makhani</span><span class="item-price">₹160</span></div>
+                <div class="menu-item"><span class="item-name">Paneer Butter Masala</span><span class="item-price">₹209</span></div>
+                <div class="menu-item"><span class="item-name">Matar Mushroom</span><span class="item-price">₹199</span></div>
+                <div class="menu-item"><span class="item-name">Mix Veg</span><span class="item-price">₹179</span></div>
+            </div>
+            <div class="menu-category">
+                <h3><i class="fas fa-bacon"></i> Chinese & Continental</h3>
+                <div class="menu-item"><span class="item-name">Veg Hakka Noodles</span><span class="item-price">₹110</span></div>
+                <div class="menu-item"><span class="item-name">Chilli Garlic Noodles</span><span class="item-price">₹130</span></div>
+                <div class="menu-item"><span class="item-name">Red Sauce Pasta</span><span class="item-price">₹129</span></div>
+                <div class="menu-item"><span class="item-name">Margherita Pizza</span><span class="item-price">₹159</span></div>
+            </div>
+            <div class="menu-category">
+                <h3><i class="fas fa-bread-slice"></i> Rice & Breads</h3>
+                <div class="menu-item"><span class="item-name">Plain Roti</span><span class="item-price">₹14</span></div>
+                <div class="menu-item"><span class="item-name">Butter Naan</span><span class="item-price">₹39</span></div>
+                <div class="menu-item"><span class="item-name">Jeera Rice</span><span class="item-price">₹99</span></div>
+                <div class="menu-item"><span class="item-name">Veg Biryani</span><span class="item-price">₹179</span></div>
+            </div>
+            <div class="menu-category">
+                <h3><i class="fas fa-glass-water"></i> Beverages</h3>
+                <div class="menu-item"><span class="item-name">Masala Tea</span><span class="item-price">₹49</span></div>
+                <div class="menu-item"><span class="item-name">Cold Coffee</span><span class="item-price">₹69</span></div>
+                <div class="menu-item"><span class="item-name">Fresh Lime Soda</span><span class="item-price">₹49</span></div>
+                <div class="menu-item"><span class="item-name">Mango Shake</span><span class="item-price">₹89</span></div>
+            </div>
+            <div class="menu-category">
+                <h3><i class="fas fa-ice-cream"></i> Desserts</h3>
+                <div class="menu-item"><span class="item-name">Gulab Jamun</span><span class="item-price">₹59</span></div>
+                <div class="menu-item"><span class="item-name">Ras Malai</span><span class="item-price">₹75</span></div>
+                <div class="menu-item"><span class="item-name">Vanilla Ice Cream</span><span class="item-price">₹69</span></div>
+            </div>
+        </div>
+        <p class="menu-note">*Taxes extra as applicable.</p>
+    </section>
+
+    <!-- Event Booking Section -->
+    <section id="booking">
+        <h2 class="section-title">Book Your Special Event</h2>
+        <p style="text-align: center; margin-bottom: 2rem;">Planning a birthday or gathering? Fill out the details below.</p>
+        
+        <div class="booking-container">
+            <form id="eventForm">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phone" placeholder="e.g. 094123 83210" required>
+                </div>
+                <div class="form-group">
+                    <label>Date of Event</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="form-group">
+                    <label>Event Type</label>
+                    <select id="eventType" required>
+                        <option value="" disabled selected>Select event type</option>
+                        <option value="Birthday Party">Birthday Party</option>
+                        <option value="Anniversary">Anniversary</option>
+                        <option value="Corporate Meeting">Corporate Meeting</option>
+                        <option value="Family Get-together">Family Get-together</option>
+                        <option value="Other Function">Other Function</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Approximate Budget (₹)</label>
+                    <input type="text" id="budget" placeholder="e.g. 5000 - 10,000">
+                </div>
+                <div class="form-group">
+                    <label>Describe Your Requirements</label>
+                    <textarea id="requirements" placeholder="E.g. Need a cake, decoration..." required></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Send Booking Request</button>
+                <div id="confirmationMessage">
+                    <h3>Booking Request Sent Successfully!</h3>
+                    <p style="margin-top:10px;">Your Booking is confirmed! We will call you shortly.</p>
+                    <p style="font-size: 0.9rem; margin-top:5px;">For more information or changes contact - <strong>9045902889</strong></p>
+                </div>
+            </form>
+
+            <div class="info-box">
+                <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Why book with us?</h3>
+                <div class="info-item"><i class="fas fa-leaf"></i><p>100% Vegetarian Menu.</p></div>
+                <div class="info-item"><i class="fas fa-rupee-sign"></i><p>Affordable pricing.</p></div>
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i><p>Transport Nagar, Haldwani.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <div style="text-align: center;">
+            <p><i class="fas fa-map-marker-alt" style="color: var(--primary-color);"></i> <strong>Address:</strong> Transport Nagar, Haldwani</p>
+            <p style="margin-top: 0.5rem;"><i class="fas fa-phone" style="color: var(--primary-color);"></i> <strong>Phone:</strong> 9045902889</p>
+        </div>
+    </section>
+
+    <footer><p>&copy; 2023 Atithi Restaurant. All Rights Reserved.</p></footer>
+
+    <!-- Backend Logic Script -->
+    <script>
+        document.getElementById('eventForm').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+
+            // 1. Gather Data
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value;
+            const eventType = document.getElementById('eventType').value;
+            const budget = document.getElementById('budget').value;
+            const requirements = document.getElementById('requirements').value;
+
+            // Configuration
+            const staffNumber = "9045902889"; // Restaurant Staff Number
+
+            // 2. Send WhatsApp to Staff (Automatic Redirect)
+            // This creates a message with all details for the staff
+            const staffMessage = `*New Booking Request*%0A`
+                + `--------------------------%0A`
+                + `*Name:* ${name}%0A`
+                + `*Phone:* ${phone}%0A`
+                + `*Date:* ${date}%0A`
+                + `*Event Type:* ${eventType}%0A`
+                + `*Budget:* ${budget}%0A`
+                + `*Details:* ${requirements}%0A`
+                + `--------------------------%0A`
+                + `_Sent from Atithi Website_`;
+
+            // Open WhatsApp in a new tab/window addressed to Staff
+            // This is the most reliable method without a paid server.
+            const whatsappUrl = `https://wa.me/91${staffNumber}?text=${staffMessage}`;
+            window.open(whatsappUrl, '_blank');
+
+            // 3. Send SMS Logic (Requires API Key)
+            // NOTE: To enable actual SMS sending, sign up for a service like Fast2SMS or Twilio
+            // and replace 'YOUR_API_KEY_HERE' below.
+            
+            const smsLogic = () => {
+                
+                // UNCOMMENT THIS SECTION IF YOU GET AN API KEY
+                
+                const apiKey = 'nDQMumrcvgyBAS8iqw4pbtRHW3f61xhj5LoNKk0UJeVYPaZTCOELNbAWkRS2tXYg8Q5afom6yD4rxT9q'; 
+                
+                // Message for Staff
+                const staffSmsBody = `New Booking: ${name}, ${phone}, ${date}, ${eventType}. Check WhatsApp for details.`;
+                
+                // Message for Customer
+                const customerSmsBody = `Your Booking is confirmed! We will call you shortly. For changes contact - ${staffNumber}. - Atithi Restaurant`;
+
+                // Send SMS to Staff
+                fetch(`https://www.fast2sms.com/dev/bulkV2?authorization=${apiKey}&route=q&message=${encodeURIComponent(staffSmsBody)}&language=english&flash=0&numbers=${staffNumber}`)
+                .then(response => console.log("Staff SMS Sent"))
+                .catch(error => console.error("SMS Error", error));
+
+                // Send SMS to Customer
+                fetch(`https://www.fast2sms.com/dev/bulkV2?authorization=${apiKey}&route=q&message=${encodeURIComponent(customerSmsBody)}&language=english&flash=0&numbers=${phone}`)
+                .then(response => console.log("Customer SMS Sent"))
+                .catch(error => console.error("SMS Error", error));
+                
+            }; 
+            
+            smsLogic(); // Calls the function (currently does nothing unless code is uncommented with key)
+
+            // 4. Show UI Confirmation
+            var msg = document.getElementById('confirmationMessage');
+            msg.style.display = 'block';
+            this.reset();
+
+            setTimeout(function() { msg.style.display = 'none'; }, 8000);
+        });
+    </script>
+</body>
+</html>
