@@ -268,31 +268,7 @@
             // NOTE: To enable actual SMS sending, sign up for a service like Fast2SMS or Twilio
             // and replace 'YOUR_API_KEY_HERE' below.
             
-            const smsLogic = () => {
-                
-                // UNCOMMENT THIS SECTION IF YOU GET AN API KEY
-                
-                const apiKey = 'nDQMumrcvgyBAS8iqw4pbtRHW3f61xhj5LoNKk0UJeVYPaZTCOELNbAWkRS2tXYg8Q5afom6yD4rxT9q'; 
-                
-                // Message for Staff
-                const staffSmsBody = `New Booking: ${name}, ${phone}, ${date}, ${eventType}. Check WhatsApp for details.`;
-                
-                // Message for Customer
-                const customerSmsBody = `Your Booking is confirmed! We will call you shortly. For changes contact - ${staffNumber}. - Atithi Restaurant`;
-
-                // Send SMS to Staff
-                fetch(`https://www.fast2sms.com/dev/bulkV2?authorization=${apiKey}&route=q&message=${encodeURIComponent(staffSmsBody)}&language=english&flash=0&numbers=${staffNumber}`)
-                .then(response => console.log("Staff SMS Sent"))
-                .catch(error => console.error("SMS Error", error));
-
-                // Send SMS to Customer
-                fetch(`https://www.fast2sms.com/dev/bulkV2?authorization=${apiKey}&route=q&message=${encodeURIComponent(customerSmsBody)}&language=english&flash=0&numbers=${phone}`)
-                .then(response => console.log("Customer SMS Sent"))
-                .catch(error => console.error("SMS Error", error));
-                
-            }; 
-            
-            smsLogic(); // Calls the function (currently does nothing unless code is uncommented with key)
+            // Calls the function (currently does nothing unless code is uncommented with key)
 
             // 4. Show UI Confirmation
             var msg = document.getElementById('confirmationMessage');
